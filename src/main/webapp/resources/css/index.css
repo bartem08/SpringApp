@@ -1,0 +1,23 @@
+@font-face {
+	font-family:helveticaneuecyr-ultralight;
+        src:url(../fonts/helveticaneuecyr-ultralight.otf);
+}
+
+body {
+    margin: 0;
+    padding-top:50px;
+    background: url(../images/background_start.jpg) no-repeat;
+    background-size:100%;
+    font-family: helveticaneuecyr-ultralight, serif;
+}
+
+.title {
+    text-align:center;
+    font-size: 50px;
+    font-weight: 100;
+    color: #fff;
+}
+
+.title a {
+    color: #fff;
+}
