@@ -1,5 +1,6 @@
 package com.baranovskiy.webapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -43,24 +44,22 @@ public class Distributor extends BaseModel {
 
     public Distributor(String name) {
         this.name = name;
+        this.cooperatedDate = Calendar.getInstance();
         this.products = new ArrayList<>();
     }
 
-    @SuppressWarnings("unused")
     public Calendar getCooperatedDate() {
         return cooperatedDate;
     }
 
-    @SuppressWarnings("unused")
     public void setCooperatedDate(Calendar cooperatedDate) {
         this.cooperatedDate = cooperatedDate;
     }
 
     public List<Supply> getProducts() {
-        return products;
+        return new ArrayList<>(products);
     }
 
-    @SuppressWarnings("unused")
     public void setProducts(List<Supply> products) {
         this.products = products;
     }
@@ -69,7 +68,6 @@ public class Distributor extends BaseModel {
         products.add(supply);
     }
 
-    @SuppressWarnings("unused")
     public void removeProduct(Supply supply) {
         products.remove(supply);
     }
