@@ -1,5 +1,7 @@
 package com.baranovskiy.webapp.model.dto;
 
+import com.baranovskiy.webapp.util.DateConverter;
+
 import java.util.Calendar;
 
 /**
@@ -10,19 +12,19 @@ import java.util.Calendar;
  * @version 1.0
  * @author Baranovskiy Artem
  */
-@SuppressWarnings("unused")
+
 public class DistributorDTO {
 
     private Integer id;
     private String name;
-    private Calendar date;
+    private String date;
 
     public DistributorDTO() {}
 
     public DistributorDTO(Integer id, String name, Calendar date) {
         this.id = id;
         this.name = name;
-        this.date = date;
+        this.date = DateConverter.calendarToString(date);
     }
 
     public Integer getId() {
@@ -41,11 +43,11 @@ public class DistributorDTO {
         this.name = name;
     }
 
-    public Calendar getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Calendar date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

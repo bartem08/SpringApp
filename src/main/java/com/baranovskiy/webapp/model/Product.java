@@ -55,7 +55,7 @@ public class Product extends BaseModel {
 
     @SuppressWarnings("unused")
     public List<Supply> getDistributors() {
-        return distributors;
+        return new ArrayList<>(distributors);
     }
 
     @SuppressWarnings("unused")
@@ -66,6 +66,7 @@ public class Product extends BaseModel {
     public void addDistributor(Supply supply) {
         distributors.add(supply);
     }
+
 
     @SuppressWarnings("unused")
     public void removeSupply(Supply supply) {
