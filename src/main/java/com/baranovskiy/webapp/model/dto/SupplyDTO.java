@@ -12,9 +12,13 @@ package com.baranovskiy.webapp.model.dto;
 public class SupplyDTO {
 
     private Integer ID;
+
     private String distributorName;
+
     private String productName;
+
     private String quality;
+
     private Float  price;
 
     public SupplyDTO() {}
@@ -31,7 +35,6 @@ public class SupplyDTO {
         return ID;
     }
 
-    @SuppressWarnings("unused")
     public void setID(Integer ID) {
         this.ID = ID;
     }
@@ -40,7 +43,6 @@ public class SupplyDTO {
         return distributorName;
     }
 
-    @SuppressWarnings("unused")
     public void setDistributorName(String distributorName) {
         this.distributorName = distributorName;
     }
@@ -49,7 +51,6 @@ public class SupplyDTO {
         return productName;
     }
 
-    @SuppressWarnings("unused")
     public void setProductName(String productName) {
         this.productName = productName;
     }
@@ -58,7 +59,6 @@ public class SupplyDTO {
         return quality;
     }
 
-    @SuppressWarnings("unused")
     public void setQuality(String quality) {
         this.quality = quality;
     }
@@ -67,7 +67,6 @@ public class SupplyDTO {
         return price;
     }
 
-    @SuppressWarnings("unused")
     public void setPrice(Float price) {
         this.price = price;
     }

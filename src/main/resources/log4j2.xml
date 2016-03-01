@@ -33,7 +33,7 @@
         </RollingFile>
         <Console name="console-log" target="SYSTEM_OUT">
             <PatternLayout>
-                <pattern>%d{HH:mm:ss}{GMT+0} %-5level [%-21logger{1}] - %m%n</pattern>
+                <pattern>%d{HH:mm:ss}{GMT+0} %-5level [%-26logger{1}] - %m%n</pattern>
             </PatternLayout>
         </Console>
     </Appenders>

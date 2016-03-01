@@ -12,27 +12,28 @@ import java.util.Calendar;
  * @version 1.0
  * @author Baranovskiy Artem
  */
-
 public class DistributorDTO {
 
-    private Integer id;
+    private Integer ID;
+
     private String name;
+
     private String date;
 
     public DistributorDTO() {}
 
     public DistributorDTO(Integer id, String name, Calendar date) {
-        this.id = id;
+        this.ID = id;
         this.name = name;
         this.date = DateConverter.calendarToString(date);
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getID() {
+        return ID;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setID(Integer ID) {
+        this.ID = ID;
     }
 
     public String getName() {

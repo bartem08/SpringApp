@@ -8,34 +8,19 @@ package com.baranovskiy.webapp.model.dto;
  * @version 1.0
  * @author Baranovskiy Artem
  */
-@SuppressWarnings("unused")
 public class ProductDTO {
 
-    private Integer id;
+    private Integer ID;
+
     private String name;
+
     private String category;
 
     public ProductDTO() {}
 
     public ProductDTO(Integer id, String category, String name) {
-        this.id = id;
+        this.ID = id;
         this.category = category;
-        this.name = name;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
     }
 
@@ -47,4 +32,19 @@ public class ProductDTO {
         this.category = category;
     }
 
+    public Integer getID() {
+        return ID;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

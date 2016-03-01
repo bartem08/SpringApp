@@ -25,6 +25,8 @@
         <hibernate.version>4.3.11.Final</hibernate.version>
         <!-- Logger -->
         <log4j.version>2.5</log4j.version>
+        <!-- Jackson -->
+        <jackson.databind>2.7.2</jackson.databind>
     </properties>
 
     <dependencies>
@@ -78,6 +80,12 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${log4j.version}</version>
+        </dependency>
+        <!-- Jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.databind}</version>
         </dependency>
     </dependencies>
 

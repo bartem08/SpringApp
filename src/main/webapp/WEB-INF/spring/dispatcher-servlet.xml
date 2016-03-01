@@ -18,6 +18,8 @@
         <beans:property name="prefix" value="/WEB-INF/views/" />
         <beans:property name="suffix" value=".jsp" />
     </beans:bean>
+    <beans:bean name="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+    <beans:bean name="jsonTemplate" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
 
     <beans:import resource="controllers.xml" />
 
