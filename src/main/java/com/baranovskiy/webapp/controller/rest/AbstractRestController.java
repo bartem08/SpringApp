@@ -47,8 +47,7 @@ public abstract class AbstractRestController<T extends BaseModel, DTO> {
             LOG.error(String.format("Model with id %d not found.", id));
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        DTO dto = converter.toDTO(model);
-        return new ResponseEntity<>(dto, HttpStatus.OK);
+        return new ResponseEntity<>(converter.toDTO(model), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
