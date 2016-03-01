@@ -12,7 +12,7 @@ public abstract class DTOConverter<T extends BaseModel, DTO> {
 
     public abstract T toModel(DTO dto);
 
-    public  List<DTO> dtoList(List<T> modelList) {
+    public  List<DTO> toDTO(List<T> modelList) {
         List<DTO> dtoList = new ArrayList<>();
         for (T model : modelList) {
             dtoList.add(toDTO(model));

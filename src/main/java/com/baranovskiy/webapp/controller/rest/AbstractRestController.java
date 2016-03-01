@@ -36,7 +36,7 @@ public abstract class AbstractRestController<T extends BaseModel, DTO> {
             LOG.error("No model in the repository.");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(converter.dtoList(models), HttpStatus.OK);
+        return new ResponseEntity<>(converter.toDTO(models), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{ID}", method = RequestMethod.GET)
