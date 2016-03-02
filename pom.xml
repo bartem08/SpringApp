@@ -27,6 +27,9 @@
         <log4j.version>2.5</log4j.version>
         <!-- Jackson -->
         <jackson.databind>2.7.2</jackson.databind>
+        <!-- Validation -->
+        <validation.api>1.0.0.GA</validation.api>
+        <hibernate-validator>4.3.0.Final</hibernate-validator>
     </properties>
 
     <dependencies>
@@ -86,6 +89,18 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.databind}</version>
+        </dependency>
+        <!-- Validation -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>${validation.api}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate-validator}</version>
         </dependency>
     </dependencies>
 

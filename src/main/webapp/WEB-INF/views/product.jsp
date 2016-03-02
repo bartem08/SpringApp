@@ -23,6 +23,20 @@
             <th>Category</th>
             <th>Action</th>
         </tr>
+        <tr>
+            <c:url value="/product/save-or-update" var="saveOrUpdateProduct"/>
+            <form:form method="post" action="${saveOrUpdateProduct}" modelAttribute="product">
+                <td><span style="color: red"><form:errors path="name" /></span></td>
+                <td><form:input path="name" /></td>
+                <td><form:select path="category" items="${categoryList}"/></td>
+                <td>
+                    <button type="submit">
+                        <c:if test="${product.ID == null}">Add</c:if>
+                        <c:if test="${product.ID != null}">Update</c:if>
+                    </button>
+                </td>
+            </form:form>
+        </tr>
         <c:if test="${!empty productList}">
             <c:forEach items="${productList}" var="product">
                 <tr>
@@ -40,20 +54,6 @@
                 </tr>
             </c:forEach>
         </c:if>
-        <tr>
-            <c:url value="/product/save-or-update" var="saveOrUpdateProduct"/>
-            <form:form method="post" action="${saveOrUpdateProduct}" modelAttribute="product">
-                <td><form:input path="ID" readonly="true"/></td>
-                <td><form:input path="name" /></td>
-                <td><form:select path="category" items="${categoryList}"/></td>
-                <td>
-                    <button type="submit">
-                        <c:if test="${product.ID == null}">Add</c:if>
-                        <c:if test="${product.ID != null}">Update</c:if>
-                    </button>
-                </td>
-            </form:form>
-        </tr>
     </table>
 </div>
 </body>

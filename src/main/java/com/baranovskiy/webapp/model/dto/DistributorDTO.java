@@ -1,7 +1,11 @@
 package com.baranovskiy.webapp.model.dto;
 
 import com.baranovskiy.webapp.util.DateConverter;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Calendar;
 
 /**
@@ -16,11 +20,15 @@ public class DistributorDTO {
 
     private Integer ID;
 
+    @Size(min = 3, max = 10)
     private String name;
 
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private String date;
 
-    public DistributorDTO() {}
+    public DistributorDTO() {
+        this.date = DateConverter.calendarToString(Calendar.getInstance());
+    }
 
     public DistributorDTO(Integer id, String name, Calendar date) {
         this.ID = id;

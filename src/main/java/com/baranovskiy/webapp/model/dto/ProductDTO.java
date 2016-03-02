@@ -1,5 +1,8 @@
 package com.baranovskiy.webapp.model.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  * Product data transfer object.
  *
@@ -12,8 +15,11 @@ public class ProductDTO {
 
     private Integer ID;
 
+    @NotNull
+    @Size(min = 3, max = 15)
     private String name;
 
+    @NotNull
     private String category;
 
     public ProductDTO() {}

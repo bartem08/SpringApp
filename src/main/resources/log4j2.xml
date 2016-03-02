@@ -11,7 +11,7 @@
                 <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL"/>
             </Filters>
             <PatternLayout>
-                <pattern>%d{HH:mm:ss}{GMT+0} %-5level [%-21logger{1}] - %m%n</pattern>
+                <pattern>%d{HH:mm:ss}{GMT+0} %-5level %-21logger{1} - %m%n</pattern>
             </PatternLayout>
             <Policies>
                 <SizeBasedTriggeringPolicy size="10 MB" />
@@ -24,7 +24,7 @@
                 <ThresholdFilter level="ERROR"/>
             </Filters>
             <PatternLayout>
-                <pattern>%d{HH:mm:ss}{GMT+0} %-5level [%-21logger{1}] - %m%n</pattern>
+                <pattern>%d{HH:mm:ss}{GMT+0} %-5level %-21logger{1} - %m%n</pattern>
             </PatternLayout>
             <Policies>
                 <SizeBasedTriggeringPolicy size="10 MB" />
@@ -33,7 +33,7 @@
         </RollingFile>
         <Console name="console-log" target="SYSTEM_OUT">
             <PatternLayout>
-                <pattern>%d{HH:mm:ss}{GMT+0} %-5level [%-26logger{1}] - %m%n</pattern>
+                <pattern>%d{HH:mm:ss}{GMT+0} %-5level %-26logger{1} - %m%n</pattern>
             </PatternLayout>
         </Console>
     </Appenders>

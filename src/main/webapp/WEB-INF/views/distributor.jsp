@@ -24,13 +24,27 @@
             <th>Date</th>
             <th>Action</th>
         </tr>
+        <tr>
+            <c:url value="/distributor/save-or-update" var="saveOrUpdateDistributor"/>
+            <form:form method="post" action="${saveOrUpdateDistributor}" modelAttribute="distributor">
+                <td><span style="color: red"><form:errors path="name" /></span></td>
+                <td><form:input path="name" /></td>
+                <td>${distributor.date}</td>
+                <td>
+                    <button type="submit">
+                        <c:if test="${distributor.ID == null}">Add</c:if>
+                        <c:if test="${distributor.ID != null}">Update</c:if>
+                    </button>
+                </td>
+            </form:form>
+        </tr>
         <c:if test="${!empty distributorList}">
         <c:forEach items="${distributorList}" var="distributor">
             <c:url value="/linked/distributor/${distributor.ID}" var="distributorSupply"/>
             <tr>
                 <td>${distributor.ID}</td>
                 <td><a href="${distributorSupply}">${distributor.name}</a></td>
-                <td><fmt:formatDate value="${distributor.cooperatedDate.time}" pattern="dd.MM.yyyy" /></td>
+                <td>${distributor.date}</td>
                 <td>
                     <c:url value="/distributor/delete/${distributor.ID}" var="deleteDistributor"/>
                     <a href="${deleteDistributor}"><img src="<c:url value="/resources/images/remove-icon.png"/>"/></a>
@@ -40,20 +54,6 @@
             </tr>
         </c:forEach>
         </c:if>
-        <tr>
-            <c:url value="/distributor/save-or-update" var="saveOrUpdateDistributor"/>
-            <form:form method="post" action="${saveOrUpdateDistributor}" modelAttribute="distributor">
-                <td><form:input path="ID" readonly="true"/></td>
-                <td><form:input path="name" /></td>
-                <td><fmt:formatDate value="${distributor.cooperatedDate.time}" pattern="dd.MM.yyyy"/></td>
-                <td>
-                    <button type="submit">
-                    <c:if test="${distributor.ID == null}">Add</c:if>
-                    <c:if test="${distributor.ID != null}">Update</c:if>
-                    </button>
-                </td>
-            </form:form>
-        </tr>
     </table>
 </div>
 </body>
