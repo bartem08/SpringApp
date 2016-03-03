@@ -3,9 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%--@elvariable id="qualityList" type="java.util.List"--%>
-<%--@elvariable id="productList" type="java.util.List"--%>
-<%--@elvariable id="supplyList" type="java.util.List"--%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,18 +25,18 @@
             <th>Action</th>
         </tr>
         <tr>
-            <c:url value="/linked/distributor/${distributorID}/save-or-update" var="saveOrUpdateSupply"/>
+            <c:url value="/linked/product/${productID}/save-or-update" var="saveOrUpdateSupply"/>
             <form:form method="post" action="${saveOrUpdateSupply}" modelAttribute="supply">
                 <td>
                     <c:if test="${!empty supply.ID}"><form:input path="ID" readonly="true"/></c:if>
                     <form:errors path="price"/>
                 </td>
-                <td><form:input path="distributorName" readonly="true"/></td>
                 <td>
-                    <form:select path="productName">
-                        <form:options items="${productList}" />
+                    <form:select path="distributorName">
+                        <form:options items="${distributorList}" />
                     </form:select>
                 </td>
+                <td><form:input path="productName" readonly="true"/></td>
                 <td>
                     <form:select path="quality">
                         <form:options items="${qualityList}"/>
@@ -63,10 +60,10 @@
                     <td>${supply.quality}</td>
                     <td>${supply.price}</td>
                     <td>
-                        <a href="<c:url value="/linked/distributor/${distributorID}/delete/${supply.ID}"/>">
+                        <a href="<c:url value="/linked/product/${productID}/delete/${supply.ID}"/>">
                             <img src="<c:url value="/resources/images/remove-icon.png"/>"/>
                         </a>
-                        <a href="<c:url value="/linked/distributor/${distributorID}/update/supply?s_id=${supply.ID}"/>">
+                        <a href="<c:url value="/linked/product/${productID}/update/supply?s_id=${supply.ID}"/>">
                             <img src="<c:url value="/resources/images/update-icon.png"/>"/>
                         </a>
                     </td>
