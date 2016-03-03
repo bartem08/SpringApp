@@ -33,7 +33,7 @@ public class DistributorController {
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String getAll(Map<String, Object> map) {
-        putModelToTheView(map, new DistributorDTO());
+        putModelToTheView(map, new DistributorDTO(), true);
         return VIEW;
     }
 
@@ -42,15 +42,13 @@ public class DistributorController {
                                BindingResult result, Map<String, Object> map) {
         if (result.hasErrors()) {
             LOG.error(result.getFieldError().getDefaultMessage());
-            map.put("distributorList", converter.toDTO(dao.getAll()));
+            putModelToTheView(map, dto, false);
             return VIEW;
         }
         if (dto.getID() == null) {
             dao.add(converter.toModel(dto));
-            LOG.info("Distributor {} was successfully inserted", dto.getName());
         } else {
             dao.update(converter.toModel(dto));
-            LOG.info("Distributor {} was successfully updated", dto.getName());
         }
         return "redirect:/distributor/all";
     }
@@ -64,12 +62,14 @@ public class DistributorController {
 
     @RequestMapping(value = "/update/distributor")
     public String updateForm(@RequestParam("id") Integer id, Map<String, Object> map) {
-        putModelToTheView(map, converter.toDTO(dao.findByID(id)));
+        putModelToTheView(map, converter.toDTO(dao.findByID(id)), true);
         return VIEW;
     }
 
-    private void putModelToTheView(Map<String, Object> map, DistributorDTO dto) {
-        map.put("distributor", dto);
+    private void putModelToTheView(Map<String, Object> map, DistributorDTO dto, boolean putDTO) {
+        if (putDTO) {
+            map.put("distributor", dto);
+        }
         map.put("distributorList", converter.toDTO(dao.getAll()));
     }
 

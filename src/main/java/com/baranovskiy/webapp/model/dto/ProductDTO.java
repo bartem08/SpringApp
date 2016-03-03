@@ -24,7 +24,7 @@ public class ProductDTO {
 
     public ProductDTO() {}
 
-    public ProductDTO(Integer id, String category, String name) {
+    public ProductDTO(Integer id, String name, String category) {
         this.ID = id;
         this.category = category;
         this.name = name;

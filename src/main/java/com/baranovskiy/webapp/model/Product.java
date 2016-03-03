@@ -67,7 +67,6 @@ public class Product extends BaseModel {
         distributors.add(supply);
     }
 
-
     @SuppressWarnings("unused")
     public void removeSupply(Supply supply) {
         distributors.remove(supply);

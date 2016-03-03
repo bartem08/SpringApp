@@ -34,7 +34,7 @@ public class ProductController {
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String productList(Map<String, Object> map) {
-        putModelToTheView(map, new ProductDTO());
+        putModelToTheView(map, new ProductDTO(), true);
         return VIEW;
     }
 
@@ -43,16 +43,13 @@ public class ProductController {
                                BindingResult result, Map<String, Object> map) {
         if (result.hasErrors()) {
             LOG.error(result.getFieldError().getDefaultMessage());
-            map.put("productList", converter.toDTO(dao.getAll()));
-            map.put("categoryList", Category.values());
+            putModelToTheView(map, dto, false);
             return VIEW;
         }
         if (dto.getID() == null) {
             dao.add(converter.toModel(dto));
-            LOG.info("Product {} was successfully inserted", dto.getName());
         } else {
             dao.update(converter.toModel(dto));
-            LOG.info("Product {} was successfully updated", dto.getName());
         }
         return "redirect:/product/all";
     }
@@ -66,12 +63,14 @@ public class ProductController {
 
     @RequestMapping(value = "/update/product")
     public String updateForm(@RequestParam("id") Integer id, Map<String, Object> map) {
-        putModelToTheView(map, converter.toDTO(dao.findByID(id)));
+        putModelToTheView(map, converter.toDTO(dao.findByID(id)), true);
         return VIEW;
     }
 
-    private void putModelToTheView(Map<String, Object> map, ProductDTO dto) {
-        map.put("product", dto);
+    private void putModelToTheView(Map<String, Object> map, ProductDTO dto, boolean putDTO) {
+        if (putDTO) {
+            map.put("product", dto);
+        }
         map.put("productList", converter.toDTO(dao.getAll()));
         map.put("categoryList", Category.values());
     }

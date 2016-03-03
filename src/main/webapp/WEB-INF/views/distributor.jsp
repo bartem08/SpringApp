@@ -27,7 +27,10 @@
         <tr>
             <c:url value="/distributor/save-or-update" var="saveOrUpdateDistributor"/>
             <form:form method="post" action="${saveOrUpdateDistributor}" modelAttribute="distributor">
-                <td><span style="color: red"><form:errors path="name" /></span></td>
+                <td>
+                    <c:if test="${!empty distributor.ID}"><form:input path="ID" readonly="true"/></c:if>
+                    <span style="color: red"><form:errors path="name" /></span>
+                </td>
                 <td><form:input path="name" /></td>
                 <td>${distributor.date}</td>
                 <td>
