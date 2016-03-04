@@ -1,7 +1,9 @@
 package com.baranovskiy.webapp.model.dto;
 
-import javax.validation.constraints.NotNull;
+import com.baranovskiy.webapp.validator.annotation.FloatValue;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Supply data transfer object. Uses for obtaining users data from
@@ -20,12 +22,14 @@ public class SupplyDTO {
     private String distributorName;
 
     @NotNull
+    @Size(min = 1, max = 22)
     private String productName;
 
     @NotNull
     private String quality;
 
     @NotNull
+    @FloatValue(min = 0.01f, max = 9999.99f)
     private String price;
 
     public SupplyDTO() {}

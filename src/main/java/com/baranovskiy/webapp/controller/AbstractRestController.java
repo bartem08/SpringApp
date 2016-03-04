@@ -1,4 +1,4 @@
-package com.baranovskiy.webapp.controller.rest;
+package com.baranovskiy.webapp.controller;
 
 import com.baranovskiy.webapp.model.BaseModel;
 import com.baranovskiy.webapp.repository.Operable;

@@ -8,19 +8,6 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:annotation-config />
-
-    <!--<bean id="hbnDistributorDAO" class="com.baranovskiy.webapp.repository.HbnDistributorDAO"/>
-    <bean id="hbnProductDAO" class="com.baranovskiy.webapp.repository.HbnProductDAO"/>
-    <bean id="hbnSupplyDAO" class="com.baranovskiy.webapp.repository.HbnSupplyDAO"/>
-
-    <bean id="distributorDtoConverter" class="com.baranovskiy.webapp.util.dtoconverter.DistributorDTOConverter"/>
-    <bean id="productDtoConverter" class="com.baranovskiy.webapp.util.dtoconverter.ProductDTOConverter"/>
-    <bean id="supplyDtoConverter" class="com.baranovskiy.webapp.util.dtoconverter.SupplyDTOConverter"/>
-
-    <bean id="restDistributorController" class="com.baranovskiy.webapp.controller.rest.RestDistributorController">
-        <constructor-arg index="0" ref="hbnDistributorDAO"/>
-        <constructor-arg index="1" ref="distributorDtoConverter"/>
-    </bean>-->
     <context:component-scan base-package="com.baranovskiy.webapp.repository"/>
     <context:component-scan base-package="com.baranovskiy.webapp.util.dtoconverter"/>
 
