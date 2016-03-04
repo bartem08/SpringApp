@@ -1,4 +1,4 @@
-<%--suppress ELValidationInJSP --%>
+<%--suppress ALL --%>
 <%@ page language="java" contentType="text/html; charset=utf8" pageEncoding="utf8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -15,6 +15,7 @@
         <a href="<c:url value="/product/all"/>">Products</a>
     </div>
     <h1>Supplies table</h1>
+    <form:form cssClass="error" modelAttribute="supply"><form:errors path="price"/></form:form>
     <table>
         <tr>
             <th>ID</th>
@@ -28,8 +29,7 @@
             <c:url value="/linked/product/${productID}/save-or-update" var="saveOrUpdateSupply"/>
             <form:form method="post" action="${saveOrUpdateSupply}" modelAttribute="supply">
                 <td>
-                    <c:if test="${!empty supply.ID}"><form:input path="ID" readonly="true"/></c:if>
-                    <form:errors path="price"/>
+                    <form:input path="ID" readonly="true"/>
                 </td>
                 <td>
                     <form:select path="distributorName">

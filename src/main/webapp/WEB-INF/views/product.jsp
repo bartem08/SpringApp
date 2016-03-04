@@ -1,9 +1,8 @@
+<%--suppress ALL --%>
 <%@ page language="java" contentType="text/html; charset=utf8" pageEncoding="utf8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%--@elvariable id="productList" type="java.util.List"--%>
-<%--@elvariable id="categoryList" type="java.util.List"--%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +15,7 @@
         <a href="<c:url value="/product/all"/>">Products</a>
     </div>
     <h1>Products table</h1>
+    <form:form cssClass="error" modelAttribute="product"><form:errors path="name"/></form:form>
     <table>
         <tr>
             <th>ID</th>
@@ -26,10 +26,7 @@
         <tr>
             <c:url value="/product/save-or-update" var="saveOrUpdateProduct"/>
             <form:form method="post" action="${saveOrUpdateProduct}" modelAttribute="product">
-                <td>
-                    <c:if test="${!empty product.ID}"><form:input path="ID" readonly="true"/></c:if>
-                    <span style="color: red"><form:errors path="name" /></span>
-                </td>
+                <td><form:input path="ID" readonly="true"/></td>
                 <td><form:input path="name" /></td>
                 <td><form:select path="category" items="${categoryList}"/></td>
                 <td>

@@ -1,8 +1,8 @@
+<%--suppress ALL --%>
 <%@ page language="java" contentType="text/html; charset=utf8" pageEncoding="utf8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%--@elvariable id="distributorList" type="java.util.List"--%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +17,7 @@
         </div>
     </div>
     <h1>Distributors table</h1>
+    <form:form cssClass="error" modelAttribute="distributor"><form:errors path="name"/></form:form>
     <table>
         <tr>
             <th>ID</th>
@@ -27,10 +28,7 @@
         <tr>
             <c:url value="/distributor/save-or-update" var="saveOrUpdateDistributor"/>
             <form:form method="post" action="${saveOrUpdateDistributor}" modelAttribute="distributor">
-                <td>
-                    <c:if test="${!empty distributor.ID}"><form:input path="ID" readonly="true"/></c:if>
-                    <span style="color: red"><form:errors path="name" /></span>
-                </td>
+                <td><form:input path="ID" readonly="true"/></td>
                 <td><form:input path="name" /></td>
                 <td>${distributor.date}</td>
                 <td>

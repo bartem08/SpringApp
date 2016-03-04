@@ -1,5 +1,9 @@
 package com.baranovskiy.webapp.model.dto;
 
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+
 /**
  * Supply data transfer object. Uses for obtaining users data from
  * spring form tabs
@@ -13,12 +17,18 @@ public class SupplyDTO {
 
     private Integer ID;
 
+    @NotNull
     private String distributorName;
 
+    @NotNull
     private String productName;
 
+    @NotNull
     private String quality;
 
+    @NotNull
+    @DecimalMin(value = "0.01")
+    @DecimalMax(value = "9999.99")
     private Float  price;
 
     public SupplyDTO() {}

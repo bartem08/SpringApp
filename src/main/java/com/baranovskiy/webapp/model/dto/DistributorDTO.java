@@ -20,6 +20,7 @@ public class DistributorDTO {
 
     private Integer ID;
 
+    @NotNull
     @Size(min = 3, max = 10)
     private String name;
 

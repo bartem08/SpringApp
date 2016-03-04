@@ -130,5 +130,13 @@ h1 {
     height: 40px;
 }
 
+form.error {
+    text-align: center;
+    width: 500px;
+    height: 30px;
+    margin: 10px auto;
+    color: red;
+}
+
 
 

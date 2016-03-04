@@ -1,5 +1,6 @@
 package com.baranovskiy.webapp.controller.web;
 
+import com.baranovskiy.webapp.controller.Filler;
 import com.baranovskiy.webapp.model.Product;
 import com.baranovskiy.webapp.model.dto.ProductDTO;
 import com.baranovskiy.webapp.model.fields.Category;
@@ -17,12 +18,10 @@ import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/product")
+@RequestMapping(Filler.Url.PRODUCT)
 public class ProductController {
 
     private static final Logger LOG = LogManager.getLogger(ProductController.class);
-
-    private final String VIEW = "product";
 
     @Autowired
     @Qualifier("hbnProductDAO")
@@ -32,47 +31,52 @@ public class ProductController {
     @Qualifier("productDTOConverter")
     private DTOConverter<Product, ProductDTO> converter;
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public String productList(Map<String, Object> map) {
-        putModelToTheView(map, new ProductDTO(), true);
-        return VIEW;
+    private void putModelToTheView(Map<String, Object> map, ProductDTO dto) {
+        if (dto != null) {
+            map.put("product", dto);
+        }
+        map.put("productList", converter.toDTO(dao.getAll()));
+        map.put("categoryList", Category.values());
     }
 
-    @RequestMapping(value = {"/save-or-update", "/update/product"}, method = RequestMethod.POST)
+    @RequestMapping(value = Filler.Url.ALL, method = RequestMethod.GET)
+    public String productList(Map<String, Object> map) {
+        putModelToTheView(map, new ProductDTO());
+        return Filler.View.PRODUCT_VIEW;
+    }
+
+    @RequestMapping(
+            value = {Filler.Url.SAVE_OR_UPDATE, Filler.Url.PRODUCT_UPDATE},
+            method = RequestMethod.POST
+    )
     public String saveOrUpdate(@ModelAttribute("product") @Valid ProductDTO dto,
                                BindingResult result, Map<String, Object> map) {
         if (result.hasErrors()) {
             LOG.error(result.getFieldError().getDefaultMessage());
-            putModelToTheView(map, dto, false);
-            return VIEW;
+            putModelToTheView(map, null);
+            return Filler.View.PRODUCT_VIEW;
         }
         if (dto.getID() == null) {
             dao.add(converter.toModel(dto));
         } else {
             dao.update(converter.toModel(dto));
         }
-        return "redirect:/product/all";
+        putModelToTheView(map, new ProductDTO());
+        return Filler.View.PRODUCT_VIEW;
     }
 
     @RequestMapping(value = "/delete/{productID}")
-    public String delete(@PathVariable("productID") Integer id) {
+    public String delete(@PathVariable("productID") Integer id,
+                         Map<String, Object> map) {
         dao.delete(id);
-        LOG.info("Product was successfully deleted");
-        return "redirect:/product/all";
+        putModelToTheView(map, new ProductDTO());
+        return Filler.View.PRODUCT_VIEW;
     }
 
-    @RequestMapping(value = "/update/product")
+    @RequestMapping(value = Filler.Url.PRODUCT_UPDATE)
     public String updateForm(@RequestParam("id") Integer id, Map<String, Object> map) {
-        putModelToTheView(map, converter.toDTO(dao.findByID(id)), true);
-        return VIEW;
-    }
-
-    private void putModelToTheView(Map<String, Object> map, ProductDTO dto, boolean putDTO) {
-        if (putDTO) {
-            map.put("product", dto);
-        }
-        map.put("productList", converter.toDTO(dao.getAll()));
-        map.put("categoryList", Category.values());
+        putModelToTheView(map, converter.toDTO(dao.findByID(id)));
+        return Filler.View.PRODUCT_VIEW;
     }
 
 }
