@@ -1,5 +1,6 @@
 package com.baranovskiy.webapp.controller.rest;
 
+import com.baranovskiy.webapp.controller.AbstractRestController;
 import com.baranovskiy.webapp.model.Supply;
 import com.baranovskiy.webapp.model.dto.SupplyDTO;
 import com.baranovskiy.webapp.repository.Operable;

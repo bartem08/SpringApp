@@ -1,8 +1,7 @@
 package com.baranovskiy.webapp.model.dto;
 
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
+
 
 /**
  * Supply data transfer object. Uses for obtaining users data from
@@ -27,13 +26,11 @@ public class SupplyDTO {
     private String quality;
 
     @NotNull
-    @DecimalMin(value = "0.01")
-    @DecimalMax(value = "9999.99")
-    private Float  price;
+    private String price;
 
     public SupplyDTO() {}
 
-    public SupplyDTO(Integer ID, String distributorName, String productName, String quality, Float price) {
+    public SupplyDTO(Integer ID, String distributorName, String productName, String quality, String price) {
         this.ID = ID;
         this.distributorName = distributorName;
         this.productName = productName;
@@ -73,11 +70,11 @@ public class SupplyDTO {
         this.quality = quality;
     }
 
-    public Float getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

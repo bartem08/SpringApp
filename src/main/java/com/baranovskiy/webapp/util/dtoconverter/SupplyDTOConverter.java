@@ -11,14 +11,15 @@ public class SupplyDTOConverter extends DTOConverter<Supply, SupplyDTO> {
     @Override
     public SupplyDTO toDTO(Supply model) {
         return new SupplyDTO(model.getID(), model.getDistributor().getName(),
-                model.getProduct().getName(), model.getQuality().toString(), model.getPrice());
+                model.getProduct().getName(), model.getQuality().toString(),
+                model.getPrice().toString());
     }
 
     @Override
     public Supply toModel(SupplyDTO supplyDTO) {
         Supply supply = new Supply();
         supply.setQuality(Quality.valueOf(supplyDTO.getQuality()));
-        supply.setPrice(supplyDTO.getPrice());
+        supply.setPrice(Float.parseFloat(supplyDTO.getPrice()));
         supply.setID(supplyDTO.getID());
         return supply;
     }

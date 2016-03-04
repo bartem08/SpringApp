@@ -40,7 +40,7 @@
                         <form:options items="${qualityList}"/>
                     </form:select>
                 </td>
-                <td><form:input path="price"/></td>
+                <td><form:input path="price" /></td>
                 <td>
                     <button type="submit">
                         <c:if test="${supply.ID == null}">Add</c:if>
