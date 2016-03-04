@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Distributor data transfer object.
@@ -27,14 +28,17 @@ public class DistributorDTO {
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private String date;
 
+    private List<SupplyDTO> products;
+
     public DistributorDTO() {
         this.date = DateConverter.calendarToString(Calendar.getInstance());
     }
 
-    public DistributorDTO(Integer id, String name, Calendar date) {
+    public DistributorDTO(Integer id, String name, Calendar date, List<SupplyDTO> products) {
         this.ID = id;
         this.name = name;
         this.date = DateConverter.calendarToString(date);
+        this.products = products;
     }
 
     public Integer getID() {
@@ -61,4 +65,11 @@ public class DistributorDTO {
         this.date = date;
     }
 
+    public List<SupplyDTO> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<SupplyDTO> products) {
+        this.products = products;
+    }
 }

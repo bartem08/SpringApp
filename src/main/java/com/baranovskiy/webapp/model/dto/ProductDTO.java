@@ -2,6 +2,7 @@ package com.baranovskiy.webapp.model.dto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 /**
  * Product data transfer object.
@@ -22,12 +23,15 @@ public class ProductDTO {
     @NotNull
     private String category;
 
+    private List<SupplyDTO> distributors;
+
     public ProductDTO() {}
 
-    public ProductDTO(Integer id, String name, String category) {
+    public ProductDTO(Integer id, String name, String category, List<SupplyDTO> distributors) {
         this.ID = id;
         this.category = category;
         this.name = name;
+        this.distributors = distributors;
     }
 
     public String getCategory() {
@@ -52,5 +56,13 @@ public class ProductDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<SupplyDTO> getDistributors() {
+        return distributors;
+    }
+
+    public void setDistributors(List<SupplyDTO> distributors) {
+        this.distributors = distributors;
     }
 }
