@@ -12,9 +12,7 @@ import java.util.List;
  * @version 1.0
  * @author Baranovskiy Artem
  */
-public class ProductDTO {
-
-    private Integer ID;
+public class ProductDTO extends BaseDTO {
 
     @NotNull
     @Size(min = 3, max = 15)
@@ -40,14 +38,6 @@ public class ProductDTO {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public Integer getID() {
-        return ID;
-    }
-
-    public void setID(Integer ID) {
-        this.ID = ID;
     }
 
     public String getName() {

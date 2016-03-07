@@ -14,9 +14,7 @@ import javax.validation.constraints.Size;
  * @version 1.0
  * @author Baranovskiy Artem
  */
-public class SupplyDTO {
-
-    private Integer ID;
+public class SupplyDTO extends BaseDTO {
 
     @NotNull
     private String distributorName;
@@ -40,14 +38,6 @@ public class SupplyDTO {
         this.productName = productName;
         this.quality = quality;
         this.price = price;
-    }
-
-    public Integer getID() {
-        return ID;
-    }
-
-    public void setID(Integer ID) {
-        this.ID = ID;
     }
 
     public String getDistributorName() {

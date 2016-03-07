@@ -17,9 +17,7 @@ import java.util.List;
  * @version 1.0
  * @author Baranovskiy Artem
  */
-public class DistributorDTO {
-
-    private Integer ID;
+public class DistributorDTO extends BaseDTO {
 
     @NotNull
     @Size(min = 3, max = 10)
@@ -39,14 +37,6 @@ public class DistributorDTO {
         this.name = name;
         this.date = DateConverter.calendarToString(date);
         this.products = products;
-    }
-
-    public Integer getID() {
-        return ID;
-    }
-
-    public void setID(Integer ID) {
-        this.ID = ID;
     }
 
     public String getName() {
