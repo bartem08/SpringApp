@@ -1,5 +1,6 @@
 package com.baranovskiy.webapp.controller.web;
 
+import com.baranovskiy.webapp.controller.AbstractWebController;
 import com.baranovskiy.webapp.controller.Filler;
 import com.baranovskiy.webapp.model.Product;
 import com.baranovskiy.webapp.model.dto.ProductDTO;
@@ -19,17 +20,15 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(Filler.Url.PRODUCT)
-public class ProductController {
+public class ProductController extends AbstractWebController<Product, ProductDTO> {
 
     private static final Logger LOG = LogManager.getLogger(ProductController.class);
 
     @Autowired
-    @Qualifier("hbnProductDAO")
-    private Operable<Product> dao;
-
-    @Autowired
-    @Qualifier("productDTOConverter")
-    private DTOConverter<Product, ProductDTO> converter;
+    public ProductController(@Qualifier("hbnProductDAO") Operable<Product> dao,
+                             @Qualifier("productDTOConverter") DTOConverter<Product, ProductDTO> converter) {
+        super(dao, converter);
+    }
 
     private void putModelToTheView(Map<String, Object> map, ProductDTO dto) {
         if (dto != null) {
@@ -56,11 +55,7 @@ public class ProductController {
             putModelToTheView(map, null);
             return Filler.View.PRODUCT_VIEW;
         }
-        if (dto.getID() == null) {
-            dao.add(converter.toModel(dto));
-        } else {
-            dao.update(converter.toModel(dto));
-        }
+        super.save(dto);
         putModelToTheView(map, new ProductDTO());
         return Filler.View.PRODUCT_VIEW;
     }

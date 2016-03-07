@@ -1,5 +1,6 @@
 package com.baranovskiy.webapp.controller.web;
 
+import com.baranovskiy.webapp.controller.AbstractWebController;
 import com.baranovskiy.webapp.controller.Filler;
 import com.baranovskiy.webapp.model.Distributor;
 import com.baranovskiy.webapp.model.dto.DistributorDTO;
@@ -21,17 +22,15 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(Filler.Url.DISTRIBUTOR)
-public class DistributorController {
+public class DistributorController extends AbstractWebController<Distributor, DistributorDTO> {
 
     private static final Logger LOG = LogManager.getLogger(DistributorController.class);
 
     @Autowired
-    @Qualifier("hbnDistributorDAO")
-    private Operable<Distributor> dao;
-
-    @Autowired
-    @Qualifier("distributorDTOConverter")
-    private DTOConverter<Distributor, DistributorDTO> converter;
+    public DistributorController(@Qualifier("hbnDistributorDAO") Operable<Distributor> dao,
+                                 @Qualifier("distributorDTOConverter") DTOConverter<Distributor, DistributorDTO> converter) {
+        super(dao, converter);
+    }
 
     private void putModelToTheView(Map<String, Object> map, DistributorDTO dto) {
         if (dto != null) {
@@ -57,11 +56,7 @@ public class DistributorController {
             putModelToTheView(map, null);
             return Filler.View.DISTRIBUTOR_VIEW;
         }
-        if (dto.getID() == null) {
-            dao.add(converter.toModel(dto));
-        } else {
-            dao.update(converter.toModel(dto));
-        }
+        super.save(dto);
         putModelToTheView(map, new DistributorDTO());
         return Filler.View.DISTRIBUTOR_VIEW;
     }

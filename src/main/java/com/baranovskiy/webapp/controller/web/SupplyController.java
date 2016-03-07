@@ -1,5 +1,6 @@
 package com.baranovskiy.webapp.controller.web;
 
+import com.baranovskiy.webapp.controller.AbstractWebController;
 import com.baranovskiy.webapp.controller.Filler;
 import com.baranovskiy.webapp.model.Distributor;
 import com.baranovskiy.webapp.model.Product;
@@ -23,7 +24,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(Filler.Url.SUPPLY)
-public class SupplyController {
+public class SupplyController extends AbstractWebController<Supply, SupplyDTO> {
 
     private static final Logger LOG = LogManager.getLogger(SupplyController.class);
 
@@ -36,22 +37,9 @@ public class SupplyController {
     private Operable<Product> productDAO;
 
     @Autowired
-    @Qualifier("hbnSupplyDAO")
-    private Operable<Supply> supplyDAO;
-
-    @Autowired
-    @Qualifier("supplyDTOConverter")
-    private DTOConverter<Supply, SupplyDTO> converter;
-
-    private void saveOrUpdate(SupplyDTO dto) {
-        Supply supply = converter.toModel(dto);
-        supply.setDistributor(distributorDAO.findByName(dto.getDistributorName()));
-        supply.setProduct(productDAO.findByName(dto.getProductName()));
-        if (dto.getID() == null) {
-            supplyDAO.add(supply);
-        } else {
-            supplyDAO.update(supply);
-        }
+    public SupplyController(@Qualifier("hbnSupplyDAO") Operable<Supply> dao,
+                            @Qualifier("supplyDTOConverter") DTOConverter<Supply, SupplyDTO> converter) {
+        super(dao, converter);
     }
 
     private void putModelByDistributorToTheView(Map<String, Object> map,
@@ -105,7 +93,7 @@ public class SupplyController {
             putModelByDistributorToTheView(map, distributorDAO.findByID(d_id), null);
             return Filler.View.SUPPLY_DISTRIBUTOR_VIEW;
         }
-        saveOrUpdate(dto);
+        super.save(dto);
         return String.format("redirect:/linked/distributor/%d", d_id);
     }
 
@@ -120,21 +108,21 @@ public class SupplyController {
             putModelByProductToTheView(map, productDAO.findByID(d_id), null);
             return Filler.View.SUPPLY_PRODUCT_VIEW;
         }
-        saveOrUpdate(dto);
+        super.save(dto);
         return String.format("redirect:/linked/product/%d", d_id);
     }
 
     @RequestMapping(value = "/distributor/{d_id}/delete/{s_id}")
     public String deleteByDistributor(@PathVariable("d_id") Integer d_id,
                                       @PathVariable("s_id") Integer s_id) {
-        supplyDAO.delete(s_id);
+        dao.delete(s_id);
         return String.format("redirect:/linked/distributor/%d", d_id);
     }
 
     @RequestMapping(value = "/product/{p_id}/delete/{s_id}")
     public String deleteByProduct(@PathVariable("p_id") Integer p_id,
                                   @PathVariable("s_id") Integer s_id) {
-        supplyDAO.delete(s_id);
+        dao.delete(s_id);
         return String.format("redirect:/linked/product/%d", p_id);
     }
 
@@ -143,7 +131,7 @@ public class SupplyController {
                              @RequestParam("s_id") Integer s_id,
                              Map<String, Object> map) {
         Distributor distributor = distributorDAO.findByID(d_id);
-        putModelByDistributorToTheView(map, distributor, converter.toDTO(supplyDAO.findByID(s_id)));
+        putModelByDistributorToTheView(map, distributor, converter.toDTO(dao.findByID(s_id)));
         return Filler.View.SUPPLY_DISTRIBUTOR_VIEW;
     }
 
@@ -152,7 +140,7 @@ public class SupplyController {
                                         @RequestParam("s_id") Integer s_id,
                                         Map<String, Object> map) {
         Product product = productDAO.findByID(p_id);
-        putModelByProductToTheView(map, product, converter.toDTO(supplyDAO.findByID(s_id)));
+        putModelByProductToTheView(map, product, converter.toDTO(dao.findByID(s_id)));
         return Filler.View.SUPPLY_PRODUCT_VIEW;
     }
 
