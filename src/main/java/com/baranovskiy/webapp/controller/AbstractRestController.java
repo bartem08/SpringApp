@@ -34,8 +34,8 @@ public abstract class AbstractRestController<T extends BaseModel, DTO> {
     public ResponseEntity getAll() {
         List<T> models = dao.getAll();
         if (models.isEmpty()) {
-            LOG.error(Message.EMPTY_REPOSITORY);
-            return Response.createResponse(Message.EMPTY_REPOSITORY, HttpStatus.NOT_FOUND);
+            LOG.error(Filler.Message.EMPTY_REPOSITORY);
+            return Response.createResponse(Filler.Message.EMPTY_REPOSITORY, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(converter.toDTO(models), HttpStatus.OK);
     }
@@ -44,8 +44,8 @@ public abstract class AbstractRestController<T extends BaseModel, DTO> {
     public ResponseEntity getByID(@PathVariable("ID") Integer id) {
         T model = dao.findByID(id);
         if (model == null) {
-            LOG.error(Message.MODEL_NOT_FOUND);
-            return Response.createResponse(Message.MODEL_NOT_FOUND, HttpStatus.NOT_FOUND);
+            LOG.error(Filler.Message.MODEL_NOT_FOUND);
+            return Response.createResponse(Filler.Message.MODEL_NOT_FOUND, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(converter.toDTO(model), HttpStatus.OK);
     }
@@ -53,11 +53,11 @@ public abstract class AbstractRestController<T extends BaseModel, DTO> {
     @RequestMapping(value = "/{ID}", method = RequestMethod.DELETE)
     public ResponseEntity<ResponseJSON> delete(@PathVariable("ID") Integer id) {
         if (dao.findByID(id) == null) {
-            LOG.error(Message.MODEL_NOT_FOUND);
-            return Response.createResponse(Message.MODEL_NOT_FOUND, HttpStatus.NOT_FOUND);
+            LOG.error(Filler.Message.MODEL_NOT_FOUND);
+            return Response.createResponse(Filler.Message.MODEL_NOT_FOUND, HttpStatus.NOT_FOUND);
         }
         dao.delete(id);
-        return Response.createResponse(Message.SUCCESS_DELETE, HttpStatus.OK);
+        return Response.createResponse(Filler.Message.SUCCESS_DELETE, HttpStatus.OK);
     }
 
     protected ResponseEntity<ResponseJSON> save(DTO dto) {
@@ -71,7 +71,7 @@ public abstract class AbstractRestController<T extends BaseModel, DTO> {
         } catch (Exception ex) {
             return Response.createResponse("already exists", HttpStatus.CONFLICT);
         }
-        return Response.createResponse(Message.SUCCESS_SAVE, HttpStatus.OK);
+        return Response.createResponse(Filler.Message.SUCCESS_SAVE, HttpStatus.OK);
     }
 
 }

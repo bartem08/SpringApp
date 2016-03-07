@@ -1,7 +1,7 @@
 package com.baranovskiy.webapp.controller.rest;
 
 import com.baranovskiy.webapp.controller.AbstractRestController;
-import com.baranovskiy.webapp.controller.Message;
+import com.baranovskiy.webapp.controller.Filler;
 import com.baranovskiy.webapp.controller.Response;
 import com.baranovskiy.webapp.model.Distributor;
 import com.baranovskiy.webapp.model.Product;
@@ -56,8 +56,8 @@ public class RestSupplyController extends AbstractRestController<Supply, SupplyD
         }
         if (distributorDAO.findByName(supplyDTO.getDistributorName()) == null ||
                 productDAO.findByName(supplyDTO.getProductName()) == null) {
-            LOG.error(Message.NONEXISTENT_MODEL);
-            return Response.createResponse(Message.NONEXISTENT_MODEL, HttpStatus.NOT_FOUND);
+            LOG.error(Filler.Message.NONEXISTENT_MODEL);
+            return Response.createResponse(Filler.Message.NONEXISTENT_MODEL, HttpStatus.NOT_FOUND);
         }
         return save(supplyDTO);
     }
