@@ -1,6 +1,6 @@
-package com.baranovskiy.webapp.model;
+package com.baranovskiy.webapp.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.baranovskiy.webapp.model.BaseModel;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 

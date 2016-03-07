@@ -1,7 +1,7 @@
 package com.baranovskiy.webapp.util.dtoconverter;
 
-import com.baranovskiy.webapp.model.Distributor;
-import com.baranovskiy.webapp.model.Supply;
+import com.baranovskiy.webapp.model.entity.Distributor;
+import com.baranovskiy.webapp.model.entity.Supply;
 import com.baranovskiy.webapp.model.dto.DistributorDTO;
 import com.baranovskiy.webapp.model.dto.SupplyDTO;
 import org.springframework.beans.factory.annotation.Autowired;

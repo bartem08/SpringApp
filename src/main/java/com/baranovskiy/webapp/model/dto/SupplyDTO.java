@@ -1,5 +1,6 @@
 package com.baranovskiy.webapp.model.dto;
 
+import com.baranovskiy.webapp.model.entity.Supply;
 import com.baranovskiy.webapp.validator.annotation.FloatValue;
 
 import javax.validation.constraints.NotNull;
@@ -10,7 +11,7 @@ import javax.validation.constraints.Size;
  * spring form tabs
  *
  * @see com.baranovskiy.webapp.model.BaseModel
- * @see com.baranovskiy.webapp.model.Supply
+ * @see Supply
  * @version 1.0
  * @author Baranovskiy Artem
  */

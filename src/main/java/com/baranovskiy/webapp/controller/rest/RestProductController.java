@@ -1,9 +1,9 @@
 package com.baranovskiy.webapp.controller.rest;
 
 import com.baranovskiy.webapp.controller.AbstractRestController;
-import com.baranovskiy.webapp.controller.Response;
-import com.baranovskiy.webapp.model.Product;
-import com.baranovskiy.webapp.controller.ResponseJSON;
+import com.baranovskiy.webapp.util.ResponseFormer;
+import com.baranovskiy.webapp.model.entity.Product;
+import com.baranovskiy.webapp.model.ResponseJSON;
 import com.baranovskiy.webapp.model.dto.ProductDTO;
 import com.baranovskiy.webapp.repository.Operable;
 import com.baranovskiy.webapp.util.dtoconverter.DTOConverter;
@@ -39,7 +39,7 @@ public class RestProductController extends AbstractRestController<Product, Produ
     public ResponseEntity<ResponseJSON> saveOrUpdate(@RequestBody @Valid ProductDTO productDTO, BindingResult result) {
         if (result.hasErrors()) {
             LOG.error(result.getFieldError().getDefaultMessage());
-            return Response.createResponse(result, HttpStatus.BAD_REQUEST);
+            return ResponseFormer.createResponse(result, HttpStatus.BAD_REQUEST);
         }
         return save(productDTO);
     }

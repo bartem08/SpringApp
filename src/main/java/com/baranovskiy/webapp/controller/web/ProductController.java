@@ -2,7 +2,7 @@ package com.baranovskiy.webapp.controller.web;
 
 import com.baranovskiy.webapp.controller.AbstractWebController;
 import com.baranovskiy.webapp.controller.Filler;
-import com.baranovskiy.webapp.model.Product;
+import com.baranovskiy.webapp.model.entity.Product;
 import com.baranovskiy.webapp.model.dto.ProductDTO;
 import com.baranovskiy.webapp.model.fields.Category;
 import com.baranovskiy.webapp.repository.Operable;

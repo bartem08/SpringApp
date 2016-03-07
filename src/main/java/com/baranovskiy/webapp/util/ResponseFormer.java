@@ -1,10 +1,11 @@
-package com.baranovskiy.webapp.controller;
+package com.baranovskiy.webapp.util;
 
+import com.baranovskiy.webapp.model.ResponseJSON;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 
-public class Response {
+public class ResponseFormer {
 
     public static ResponseEntity<ResponseJSON> createResponse(BindingResult result, HttpStatus status) {
         ResponseJSON responseJSON = new ResponseJSON(result.getFieldError().getDefaultMessage());

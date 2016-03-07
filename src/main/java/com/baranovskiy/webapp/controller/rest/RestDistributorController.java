@@ -1,9 +1,9 @@
 package com.baranovskiy.webapp.controller.rest;
 
 import com.baranovskiy.webapp.controller.AbstractRestController;
-import com.baranovskiy.webapp.controller.Response;
-import com.baranovskiy.webapp.model.Distributor;
-import com.baranovskiy.webapp.controller.ResponseJSON;
+import com.baranovskiy.webapp.util.ResponseFormer;
+import com.baranovskiy.webapp.model.entity.Distributor;
+import com.baranovskiy.webapp.model.ResponseJSON;
 import com.baranovskiy.webapp.model.dto.DistributorDTO;
 import com.baranovskiy.webapp.repository.Operable;
 import com.baranovskiy.webapp.util.dtoconverter.DTOConverter;
@@ -36,7 +36,7 @@ public class RestDistributorController extends AbstractRestController<Distributo
     public ResponseEntity<ResponseJSON> saveOrUpdate(@RequestBody @Valid DistributorDTO distributorDTO, BindingResult result) {
         if (result.hasErrors()) {
             LOG.error(result.getFieldError().getDefaultMessage());
-            return Response.createResponse(result, HttpStatus.CONFLICT);
+            return ResponseFormer.createResponse(result, HttpStatus.CONFLICT);
         }
         return save(distributorDTO);
     }

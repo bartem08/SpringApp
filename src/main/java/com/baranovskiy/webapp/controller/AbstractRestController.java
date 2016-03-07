@@ -1,7 +1,9 @@
 package com.baranovskiy.webapp.controller;
 
 import com.baranovskiy.webapp.model.BaseModel;
+import com.baranovskiy.webapp.model.ResponseJSON;
 import com.baranovskiy.webapp.repository.Operable;
+import com.baranovskiy.webapp.util.ResponseFormer;
 import com.baranovskiy.webapp.util.dtoconverter.DTOConverter;
 
 import org.apache.logging.log4j.LogManager;
@@ -35,7 +37,7 @@ public abstract class AbstractRestController<T extends BaseModel, DTO> {
         List<T> models = dao.getAll();
         if (models.isEmpty()) {
             LOG.error(Filler.Message.EMPTY_REPOSITORY);
-            return Response.createResponse(Filler.Message.EMPTY_REPOSITORY, HttpStatus.NOT_FOUND);
+            return ResponseFormer.createResponse(Filler.Message.EMPTY_REPOSITORY, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(converter.toDTO(models), HttpStatus.OK);
     }
@@ -45,7 +47,7 @@ public abstract class AbstractRestController<T extends BaseModel, DTO> {
         T model = dao.findByID(id);
         if (model == null) {
             LOG.error(Filler.Message.MODEL_NOT_FOUND);
-            return Response.createResponse(Filler.Message.MODEL_NOT_FOUND, HttpStatus.NOT_FOUND);
+            return ResponseFormer.createResponse(Filler.Message.MODEL_NOT_FOUND, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(converter.toDTO(model), HttpStatus.OK);
     }
@@ -54,10 +56,10 @@ public abstract class AbstractRestController<T extends BaseModel, DTO> {
     public ResponseEntity<ResponseJSON> delete(@PathVariable("ID") Integer id) {
         if (dao.findByID(id) == null) {
             LOG.error(Filler.Message.MODEL_NOT_FOUND);
-            return Response.createResponse(Filler.Message.MODEL_NOT_FOUND, HttpStatus.NOT_FOUND);
+            return ResponseFormer.createResponse(Filler.Message.MODEL_NOT_FOUND, HttpStatus.NOT_FOUND);
         }
         dao.delete(id);
-        return Response.createResponse(Filler.Message.SUCCESS_DELETE, HttpStatus.OK);
+        return ResponseFormer.createResponse(Filler.Message.SUCCESS_DELETE, HttpStatus.OK);
     }
 
     protected ResponseEntity<ResponseJSON> save(DTO dto) {
@@ -69,9 +71,9 @@ public abstract class AbstractRestController<T extends BaseModel, DTO> {
                 dao.update(model);
             }
         } catch (Exception ex) {
-            return Response.createResponse("already exists", HttpStatus.CONFLICT);
+            return ResponseFormer.createResponse("already exists", HttpStatus.CONFLICT);
         }
-        return Response.createResponse(Filler.Message.SUCCESS_SAVE, HttpStatus.OK);
+        return ResponseFormer.createResponse(Filler.Message.SUCCESS_SAVE, HttpStatus.OK);
     }
 
 }

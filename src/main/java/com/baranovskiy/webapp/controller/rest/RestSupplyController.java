@@ -2,11 +2,11 @@ package com.baranovskiy.webapp.controller.rest;
 
 import com.baranovskiy.webapp.controller.AbstractRestController;
 import com.baranovskiy.webapp.controller.Filler;
-import com.baranovskiy.webapp.controller.Response;
-import com.baranovskiy.webapp.model.Distributor;
-import com.baranovskiy.webapp.model.Product;
-import com.baranovskiy.webapp.controller.ResponseJSON;
-import com.baranovskiy.webapp.model.Supply;
+import com.baranovskiy.webapp.util.ResponseFormer;
+import com.baranovskiy.webapp.model.entity.Distributor;
+import com.baranovskiy.webapp.model.entity.Product;
+import com.baranovskiy.webapp.model.ResponseJSON;
+import com.baranovskiy.webapp.model.entity.Supply;
 import com.baranovskiy.webapp.model.dto.SupplyDTO;
 import com.baranovskiy.webapp.repository.Operable;
 import com.baranovskiy.webapp.util.dtoconverter.DTOConverter;
@@ -52,12 +52,12 @@ public class RestSupplyController extends AbstractRestController<Supply, SupplyD
     public ResponseEntity<ResponseJSON> saveOrUpdate(@RequestBody @Valid SupplyDTO supplyDTO, BindingResult result) {
         if (result.hasErrors()) {
             LOG.error(result.getFieldError().getDefaultMessage());
-            return Response.createResponse(result, HttpStatus.BAD_REQUEST);
+            return ResponseFormer.createResponse(result, HttpStatus.BAD_REQUEST);
         }
         if (distributorDAO.findByName(supplyDTO.getDistributorName()) == null ||
                 productDAO.findByName(supplyDTO.getProductName()) == null) {
             LOG.error(Filler.Message.NONEXISTENT_MODEL);
-            return Response.createResponse(Filler.Message.NONEXISTENT_MODEL, HttpStatus.NOT_FOUND);
+            return ResponseFormer.createResponse(Filler.Message.NONEXISTENT_MODEL, HttpStatus.NOT_FOUND);
         }
         return save(supplyDTO);
     }

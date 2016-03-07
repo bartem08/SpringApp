@@ -1,5 +1,6 @@
-package com.baranovskiy.webapp.model;
+package com.baranovskiy.webapp.model.entity;
 
+import com.baranovskiy.webapp.model.BaseModel;
 import com.baranovskiy.webapp.model.fields.Category;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;

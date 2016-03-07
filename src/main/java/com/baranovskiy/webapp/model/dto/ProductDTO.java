@@ -1,5 +1,7 @@
 package com.baranovskiy.webapp.model.dto;
 
+import com.baranovskiy.webapp.model.entity.Distributor;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.List;
  * Product data transfer object.
  *
  * @see com.baranovskiy.webapp.model.BaseModel
- * @see com.baranovskiy.webapp.model.Distributor
+ * @see Distributor
  * @version 1.0
  * @author Baranovskiy Artem
  */

@@ -1,10 +1,10 @@
 package com.baranovskiy.webapp.model.dto;
 
+import com.baranovskiy.webapp.model.entity.Distributor;
 import com.baranovskiy.webapp.util.DateConverter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Calendar;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
  * Distributor data transfer object.
  *
  * @see com.baranovskiy.webapp.model.BaseModel
- * @see com.baranovskiy.webapp.model.Distributor
+ * @see Distributor
  * @version 1.0
  * @author Baranovskiy Artem
  */

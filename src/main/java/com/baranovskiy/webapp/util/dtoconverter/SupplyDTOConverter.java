@@ -1,8 +1,8 @@
 package com.baranovskiy.webapp.util.dtoconverter;
 
-import com.baranovskiy.webapp.model.Distributor;
-import com.baranovskiy.webapp.model.Product;
-import com.baranovskiy.webapp.model.Supply;
+import com.baranovskiy.webapp.model.entity.Distributor;
+import com.baranovskiy.webapp.model.entity.Product;
+import com.baranovskiy.webapp.model.entity.Supply;
 import com.baranovskiy.webapp.model.dto.SupplyDTO;
 import com.baranovskiy.webapp.model.fields.Quality;
 import com.baranovskiy.webapp.repository.Operable;

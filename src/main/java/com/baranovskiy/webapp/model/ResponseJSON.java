@@ -1,4 +1,4 @@
-package com.baranovskiy.webapp.controller;
+package com.baranovskiy.webapp.model;
 
 public class ResponseJSON {
 

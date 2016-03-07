@@ -5,9 +5,9 @@
     <session-factory>
 
         <mapping class="com.baranovskiy.webapp.model.BaseModel"/>
-        <mapping class="com.baranovskiy.webapp.model.Distributor"/>
-        <mapping class="com.baranovskiy.webapp.model.Product"/>
-        <mapping class="com.baranovskiy.webapp.model.Supply"/>
+        <mapping class="com.baranovskiy.webapp.model.entity.Distributor"/>
+        <mapping class="com.baranovskiy.webapp.model.entity.Product"/>
+        <mapping class="com.baranovskiy.webapp.model.entity.Supply"/>
 
     </session-factory>
 </hibernate-configuration>

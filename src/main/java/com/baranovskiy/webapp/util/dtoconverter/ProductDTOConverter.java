@@ -1,7 +1,7 @@
 package com.baranovskiy.webapp.util.dtoconverter;
 
-import com.baranovskiy.webapp.model.Product;
-import com.baranovskiy.webapp.model.Supply;
+import com.baranovskiy.webapp.model.entity.Product;
+import com.baranovskiy.webapp.model.entity.Supply;
 import com.baranovskiy.webapp.model.dto.ProductDTO;
 import com.baranovskiy.webapp.model.dto.SupplyDTO;
 import com.baranovskiy.webapp.model.fields.Category;

@@ -1,6 +1,6 @@
 package com.baranovskiy.webapp.repository;
 
-import com.baranovskiy.webapp.model.Supply;
+import com.baranovskiy.webapp.model.entity.Supply;
 import org.springframework.stereotype.Repository;
 
 /**
