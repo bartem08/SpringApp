@@ -1,5 +1,6 @@
 package com.baranovskiy.webapp.model.dto;
 
+import com.baranovskiy.webapp.model.BaseDTO;
 import com.baranovskiy.webapp.model.entity.Supply;
 import com.baranovskiy.webapp.validator.annotation.FloatValue;
 

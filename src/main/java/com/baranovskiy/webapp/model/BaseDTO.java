@@ -1,4 +1,4 @@
-package com.baranovskiy.webapp.model.dto;
+package com.baranovskiy.webapp.model;
 
 public class BaseDTO {
 

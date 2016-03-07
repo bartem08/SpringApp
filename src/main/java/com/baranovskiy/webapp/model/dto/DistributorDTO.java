@@ -1,5 +1,6 @@
 package com.baranovskiy.webapp.model.dto;
 
+import com.baranovskiy.webapp.model.BaseDTO;
 import com.baranovskiy.webapp.model.entity.Distributor;
 import com.baranovskiy.webapp.util.DateConverter;
 import org.springframework.format.annotation.DateTimeFormat;
