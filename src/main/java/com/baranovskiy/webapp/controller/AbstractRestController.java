@@ -3,8 +3,10 @@ package com.baranovskiy.webapp.controller;
 import com.baranovskiy.webapp.model.BaseModel;
 import com.baranovskiy.webapp.repository.Operable;
 import com.baranovskiy.webapp.util.dtoconverter.DTOConverter;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,46 +31,47 @@ public abstract class AbstractRestController<T extends BaseModel, DTO> {
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public ResponseEntity<List<DTO>> getAll() {
-        LOG.info("Attempt to fetch all.");
+    public ResponseEntity getAll() {
         List<T> models = dao.getAll();
         if (models.isEmpty()) {
-            LOG.error("No model in the repository.");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            LOG.error(Message.EMPTY_REPOSITORY);
+            return Response.createResponse(Message.EMPTY_REPOSITORY, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(converter.toDTO(models), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{ID}", method = RequestMethod.GET)
-    public ResponseEntity<DTO> getByID(@PathVariable("ID") Integer id) {
-        LOG.info(String.format("Fetching model with id %d.", id));
+    public ResponseEntity getByID(@PathVariable("ID") Integer id) {
         T model = dao.findByID(id);
         if (model == null) {
-            LOG.error(String.format("Model with id %d not found.", id));
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            LOG.error(Message.MODEL_NOT_FOUND);
+            return Response.createResponse(Message.MODEL_NOT_FOUND, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(converter.toDTO(model), HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> add() {
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<Void> update() {
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
     @RequestMapping(value = "/{ID}", method = RequestMethod.DELETE)
-    public ResponseEntity<T> delete(@PathVariable("ID") Integer id) {
-        LOG.info(String.format("Deleting distributor with id %d.", id));
+    public ResponseEntity<ResponseJSON> delete(@PathVariable("ID") Integer id) {
         if (dao.findByID(id) == null) {
-            LOG.error(String.format("Model with id %d not found.", id));
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            LOG.error(Message.MODEL_NOT_FOUND);
+            return Response.createResponse(Message.MODEL_NOT_FOUND, HttpStatus.NOT_FOUND);
         }
         dao.delete(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return Response.createResponse(Message.SUCCESS_DELETE, HttpStatus.OK);
+    }
+
+    protected ResponseEntity<ResponseJSON> save(DTO dto) {
+        T model = converter.toModel(dto);
+        try {
+            if (dao.findByID(model.getID()) == null) {
+                dao.add(model);
+            } else {
+                dao.update(model);
+            }
+        } catch (Exception ex) {
+            return Response.createResponse("already exists", HttpStatus.CONFLICT);
+        }
+        return Response.createResponse(Message.SUCCESS_SAVE, HttpStatus.OK);
     }
 
 }
