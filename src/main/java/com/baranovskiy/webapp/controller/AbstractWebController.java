@@ -1,7 +1,7 @@
 package com.baranovskiy.webapp.controller;
 
 import com.baranovskiy.webapp.model.BaseModel;
-import com.baranovskiy.webapp.model.dto.BaseDTO;
+import com.baranovskiy.webapp.model.BaseDTO;
 import com.baranovskiy.webapp.repository.Operable;
 import com.baranovskiy.webapp.util.dtoconverter.DTOConverter;
 import org.apache.logging.log4j.LogManager;

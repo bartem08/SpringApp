@@ -70,14 +70,14 @@ public class SupplyController extends AbstractWebController<Supply, SupplyDTO> {
 
     @RequestMapping(value = "/distributor/{d_id}", method = RequestMethod.GET)
     public String allByDistributor(@PathVariable("d_id") Integer d_id, Map<String, Object> map) {
-        Distributor distributor = distributorDAO.findByID(d_id);
+        final Distributor distributor = distributorDAO.findByID(d_id);
         putModelByDistributorToTheView(map, distributor, new SupplyDTO());
         return Filler.View.SUPPLY_DISTRIBUTOR_VIEW;
     }
 
     @RequestMapping(value = "/product/{p_id}", method = RequestMethod.GET)
     public String allByProduct(@PathVariable("p_id") Integer d_id, Map<String, Object> map) {
-        Product product = productDAO.findByID(d_id);
+        final Product product = productDAO.findByID(d_id);
         putModelByProductToTheView(map, product, new SupplyDTO());
         return Filler.View.SUPPLY_PRODUCT_VIEW;
     }
@@ -130,7 +130,7 @@ public class SupplyController extends AbstractWebController<Supply, SupplyDTO> {
     public String updateDistributorForm(@PathVariable("d_id") Integer d_id,
                              @RequestParam("s_id") Integer s_id,
                              Map<String, Object> map) {
-        Distributor distributor = distributorDAO.findByID(d_id);
+        final Distributor distributor = distributorDAO.findByID(d_id);
         putModelByDistributorToTheView(map, distributor, converter.toDTO(dao.findByID(s_id)));
         return Filler.View.SUPPLY_DISTRIBUTOR_VIEW;
     }
@@ -139,7 +139,7 @@ public class SupplyController extends AbstractWebController<Supply, SupplyDTO> {
     public String updateProductForm(@PathVariable("p_id") Integer p_id,
                                         @RequestParam("s_id") Integer s_id,
                                         Map<String, Object> map) {
-        Product product = productDAO.findByID(p_id);
+        final Product product = productDAO.findByID(p_id);
         putModelByProductToTheView(map, product, converter.toDTO(dao.findByID(s_id)));
         return Filler.View.SUPPLY_PRODUCT_VIEW;
     }

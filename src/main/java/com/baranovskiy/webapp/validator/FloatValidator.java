@@ -22,8 +22,8 @@ public class FloatValidator implements ConstraintValidator<FloatValue, String> {
     }
 
     @Override
-    public boolean isValid(String price, ConstraintValidatorContext constraintValidatorContext) {
-        return price != null && price.matches("\\d+|\\d+\\.\\d+") && isInRange(Float.parseFloat(price));
+    public boolean isValid(final String value, ConstraintValidatorContext constraintValidatorContext) {
+        return value != null && value.matches("\\d+|\\d+\\.\\d+") && isInRange(Float.parseFloat(value));
     }
 
 }

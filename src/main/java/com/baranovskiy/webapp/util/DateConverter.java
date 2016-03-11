@@ -1,6 +1,5 @@
 package com.baranovskiy.webapp.util;
 
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,12 +7,12 @@ import java.util.Calendar;
 
 public class DateConverter {
 
-    public static String calendarToString(Calendar calendar) {
+    public static String calendarToString(final Calendar calendar) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         return dateFormat.format(calendar.getTime());
     }
 
-    public static Calendar stringToCalendar(String date) {
+    public static Calendar stringToCalendar(final String date) {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Calendar calendar = Calendar.getInstance();
         try {

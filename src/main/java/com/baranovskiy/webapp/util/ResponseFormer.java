@@ -12,7 +12,7 @@ public class ResponseFormer {
         return new ResponseEntity<>(responseJSON, status);
     }
 
-    public static ResponseEntity<ResponseJSON> createResponse(String message, HttpStatus status) {
+    public static ResponseEntity<ResponseJSON> createResponse(final String message, HttpStatus status) {
         ResponseJSON responseJSON = new ResponseJSON(message);
         return new ResponseEntity<>(responseJSON, status);
     }

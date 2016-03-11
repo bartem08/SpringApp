@@ -34,7 +34,7 @@ public abstract class AbstractRestController<T extends BaseModel, DTO> {
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity getAll() {
-        List<T> models = dao.getAll();
+        final List<T> models = dao.getAll();
         if (models.isEmpty()) {
             LOG.error(Filler.Message.EMPTY_REPOSITORY);
             return ResponseFormer.createResponse(Filler.Message.EMPTY_REPOSITORY, HttpStatus.NOT_FOUND);
@@ -44,7 +44,7 @@ public abstract class AbstractRestController<T extends BaseModel, DTO> {
 
     @RequestMapping(value = "/{ID}", method = RequestMethod.GET)
     public ResponseEntity getByID(@PathVariable("ID") Integer id) {
-        T model = dao.findByID(id);
+        final T model = dao.findByID(id);
         if (model == null) {
             LOG.error(Filler.Message.MODEL_NOT_FOUND);
             return ResponseFormer.createResponse(Filler.Message.MODEL_NOT_FOUND, HttpStatus.NOT_FOUND);
@@ -63,7 +63,7 @@ public abstract class AbstractRestController<T extends BaseModel, DTO> {
     }
 
     protected ResponseEntity<ResponseJSON> save(DTO dto) {
-        T model = converter.toModel(dto);
+        final T model = converter.toModel(dto);
         try {
             if (dao.findByID(model.getID()) == null) {
                 dao.add(model);
@@ -71,7 +71,7 @@ public abstract class AbstractRestController<T extends BaseModel, DTO> {
                 dao.update(model);
             }
         } catch (Exception ex) {
-            return ResponseFormer.createResponse("already exists", HttpStatus.CONFLICT);
+            return ResponseFormer.createResponse("Element already exists", HttpStatus.CONFLICT);
         }
         return ResponseFormer.createResponse(Filler.Message.SUCCESS_SAVE, HttpStatus.OK);
     }
